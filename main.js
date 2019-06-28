@@ -84,7 +84,7 @@ function updatedInventory() {
                     </div>
 
                     <br />
-                    <button type="button" class="saveItemEdits btn btn-primary pull-right">Save changes</button>
+                    <button type="button" value="${Inventory.items[i].id}" class="saveItemEdits btn btn-primary pull-right">Save changes</button>
                   </form>
                 </div>
               </div>
@@ -150,20 +150,21 @@ function saveChanges() {
   let currentItemId = this.value;
   let currentIndex = Inventory.items.findIndex(x => x.id == currentItemId);
   console.log(`currentItemId = ${currentItemId}`)
+  console.log(`current Index happens to be = ${currentIndex}`);
 
-  //Inventory.items[ind].product = getInputValue('editItemName');
-  //Inventory.items[ind].brand = getInputValue('editItemBrand');
+  Inventory.items[currentIndex].product = getInputValue('editItemName');
+  Inventory.items[currentIndex].brand = getInputValue('editItemBrand');
 
-  //Inventory.items[ind].amount = getInputValue('editItemAmount');
-  //Inventory.items[ind].amount = parseInt(Inventory.items[ind].amount, 10)
+  Inventory.items[currentIndex].amount = getInputValue('editItemAmount');
+  Inventory.items[currentIndex].amount = parseInt(Inventory.items[currentIndex].amount, 10)
 
-  //Inventory.items[ind].image = getInputValue('editItemImage');
-  //Inventory.items[ind].description = getInputValue('editItemStatusDescription');
-  //Inventory.items[ind].location = getInputValue('editItemLocation');
+  Inventory.items[currentIndex].image = getInputValue('editItemImage');
+  Inventory.items[currentIndex].description = getInputValue('editItemStatusDescription');
+  Inventory.items[currentIndex].location = getInputValue('editItemLocation');
 
-  //	updatedInventory();
-  //${Inventory.items[i].id}
-  //$('').modal('hide');
+  	updatedInventory();
+// let currentModal =
+      $('#' + (Inventory.items[currentIndex].id).toString() +'').modal('hide');
 }
 
 updatedInventory();
