@@ -84,7 +84,7 @@ function updatedInventory() {
                     </div>
 
                     <br />
-                    <button type="button" value="${Inventory.items[i].id}" class="saveItemEdits btn btn-primary pull-right">Save changes</button>
+                    <button data-dismiss="modal" type="button" value="${Inventory.items[i].id}" class="saveItemEdits btn btn-primary pull-right">Save changes</button>
                   </form>
                 </div>
               </div>
