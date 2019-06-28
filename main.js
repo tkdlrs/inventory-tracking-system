@@ -52,23 +52,23 @@ function updatedInventory() {
               <div class="row">
                 <div class="col-sm-12">
                   <form id="editItemForm" method="post">
-                    <label for="editItemName">Item name</label>
-                    <input class="form-control" type="text" id="editItemName" value="${Inventory.items[i].product}" required=""/>
+                    <label for="editItem${Inventory.items[i].id}Name">Item name</label>
+                    <input class="form-control" type="text" id="editItem${Inventory.items[i].id}Name" value="${Inventory.items[i].product}" required=""/>
 
-                    <label for="editItemBrand">Item Brand</label>
-                    <input class="form-control" type="text" id="editItemBrand" value="${Inventory.items[i].brand}" required="" />
+                    <label for="editItem${Inventory.items[i].id}Brand">Item Brand</label>
+                    <input class="form-control" type="text" id="editItem${Inventory.items[i].id}Brand" value="${Inventory.items[i].brand}" required="" />
 
-                    <label for="editItemAmount">Amount</label>
-                    <input class="form-control" type="number" id="editItemAmount" value="${Inventory.items[i].amount}" required=""/>
+                    <label for="editItem${Inventory.items[i].id}Amount">Amount</label>
+                    <input class="form-control" type="number" id="editItem${Inventory.items[i].id}Amount" value="${Inventory.items[i].amount}" required=""/>
 
-                    <label for="editItemImage">URL of Image</label>
-                    <input class="form-control" type="text" id="editItemImage" value="${Inventory.items[i].image}" required=""/>
+                    <label for="editItem${Inventory.items[i].id}Image">URL of Image</label>
+                    <input class="form-control" type="text" id="editItem${Inventory.items[i].id}Image" value="${Inventory.items[i].image}" required=""/>
 
-                    <label for="editItemStatusDescription">Description of Inventory Item</label>
-                    <textarea class="form-control" id="editItemStatusDescription" rows="3" required="">${Inventory.items[i].description}</textarea>
+                    <label for="editItem${Inventory.items[i].id}StatusDescription">Description of Inventory Item</label>
+                    <textarea class="form-control" id="editItem${Inventory.items[i].id}StatusDescription" rows="3" required="">${Inventory.items[i].description}</textarea>
 
-                    <label for="editItemLocation">Location</label>
-                    <input class="form-control" type="text" id="editItemLocation" value="${Inventory.items[i].location}" required=""/>
+                    <label for="editItem${Inventory.items[i].id}Location">Location</label>
+                    <input class="form-control" type="text" id="editItem${Inventory.items[i].id}Location" value="${Inventory.items[i].location}" required=""/>
 
                     <div>
                       <p>Check out status</p>
@@ -119,6 +119,8 @@ function updatedInventory() {
 
 }
 
+updatedInventory();
+
 // next function removes inventory items
 function removeItem() {
   let currentItemId = this.value;
@@ -146,47 +148,62 @@ function getInputValue(id) {
   return document.getElementById(id).value;
 }
 
+function sanitizer(string) {
+  return string.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '$apos;');
+}
+// end of helper functions
+
 function saveChanges() {
   let currentItemId = this.value;
+
   let currentIndex = Inventory.items.findIndex(x => x.id == currentItemId);
-  console.log(`currentItemId = ${currentItemId}`)
-  console.log(`current Index happens to be = ${currentIndex}`);
 
-  Inventory.items[currentIndex].product = getInputValue('editItemName');
-  Inventory.items[currentIndex].brand = getInputValue('editItemBrand');
+  let updatedItemName = getInputValue(`editItem${Inventory.items[currentIndex].id}Name`);
+  Inventory.items[currentIndex].product = sanitizer(updatedItemName);
 
-  Inventory.items[currentIndex].amount = getInputValue('editItemAmount');
-  Inventory.items[currentIndex].amount = parseInt(Inventory.items[currentIndex].amount, 10)
+  let updatedItemBrand = getInputValue(`editItem${Inventory.items[currentIndex].id}Brand`);
+  Inventory.items[currentIndex].brand = sanitizer(updatedItemBrand);
 
-  Inventory.items[currentIndex].image = getInputValue('editItemImage');
-  Inventory.items[currentIndex].description = getInputValue('editItemStatusDescription');
-  Inventory.items[currentIndex].location = getInputValue('editItemLocation');
+  let updatedItemAmount = getInputValue(`editItem${Inventory.items[currentIndex].id}Amount`);
+  sanitizer(updatedItemAmount);
+  Inventory.items[currentIndex].amount = parseInt(updatedItemAmount, 10);
 
-  	updatedInventory();
-// let currentModal =
-      $('#' + (Inventory.items[currentIndex].id).toString() +'').modal('hide');
+  let updatedItemImage = getInputValue(`editItem${Inventory.items[currentIndex].id}Image`);
+  Inventory.items[currentIndex].image = sanitizer(updatedItemImage);
+
+  let updatedItemStatusDescription = getInputValue(`editItem${Inventory.items[currentIndex].id}StatusDescription`);
+  Inventory.items[currentIndex].description = sanitizer(updatedItemStatusDescription);
+
+  let updatedItemLocation = getInputValue(`editItem${Inventory.items[currentIndex].id}Location`);
+  Inventory.items[currentIndex].location = sanitizer(updatedItemLocation);
+
+  updatedInventory();
+
 }
 
-updatedInventory();
+// Beginning of script for adding things to the inventory tracker
 
-
-
-      // Beginning of script for adding things to the inventory tracker
-
-  document.getElementById('addNewItem').addEventListener('submit', submitItem);
+document.getElementById('addNewItem').addEventListener('submit', submitItem);
 
 function submitItem(e) {
   e.preventDefault();
 
   let itemBrand = getInputValue('itemBrand');
+  sanitizer(itemBrand);
   let itemName = getInputValue('itemName');
+  sanitizer(itemName);
   let itemAmount = getInputValue('itemAmount');
+  sanitizer(itemAmount);
   itemAmount = parseInt(itemAmount, 10);
 
   let itemImage = getInputValue('itemImage');
+  sanitizer(itemImage);
   let itemDescription = getInputValue('description');
+  sanitizer(itemDescription);
   let itemLocation = getInputValue('itemLocation');
+  sanitizer(itemLocation);
   let itemCheckoutStatus = document.getElementsByName('status');
+  sanitizer(itemCheckoutStatus);
 
   for (var status = 0; status < itemCheckoutStatus.length; status++) {
     if (itemCheckoutStatus[status].checked) {
