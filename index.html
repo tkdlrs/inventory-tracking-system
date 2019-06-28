@@ -1,12 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Inventory Tracking System</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+    .card {
+      min-height: 650px;
+      border: 1px dashed black;
+      padding: 18px;
+      border-radius: 12px;
+      margin: 12px auto;
+    }
+
+    .card h2 {
+      text-align: center;
+    }
+
+    .card img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .card ul li {
+      margin-left: 12px;
+    }
+  </style>
 </head>
+
 <body>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div>
+          <h2>
+            Add a New Item to Inventory
+          </h2>
+          <form id="addNewItem" method="post">
+            <label for="itemName">Item name</label>
+            <input class="form-control" type="text" id="itemName" required="" />
+
+            <label for="itemBrand">Item Brand</label>
+            <input class="form-control" type="text" id="itemBrand" required="" />
+
+            <label for="itemAmount">Amount</label>
+            <input class="form-control" type="number" id="itemAmount" required="" />
+
+            <label for="itemImage">URL of Image</label>
+            <input class="form-control" type="text" id="itemImage" required="" />
+
+            <label for="description">Description of Inventory Item</label>
+            <textarea class="form-control" id="description" rows="3" required=""></textarea>
+
+            <label for="itemLocation">Location</label>
+            <input class="form-control" type="text" id="itemLocation" required="" />
+
+            <div>
+              <p for="status">Check out status</p>
+              <label class="radio-inline" for="true">
+                <input type="radio" name="status" value="true" />
+                Yes
+              </label>
+
+              <label class="radio-inline" for="false">
+                <input type="radio" name="status" value="false" checked="" />
+                No
+              </label>
+            </div>
+
+            <label for="itemId">Item Id</label>
+            <input class="form-control" type="text" id="itemId" required="" />
+
+            <br />
+            <button class="btn btn-info pull-right" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="inventoryDrop"></div>
+
+    <div id="modalDrop"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+
 </body>
+
 </html>
