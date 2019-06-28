@@ -10,7 +10,7 @@ function compare(a, b) {
 };
 
 function updatedInventory() {
-  var x = '<div class="col-sm-12"><h1>(UPEL/Power, Metal factory, IDEA Factory, ECE Store) Inventory</h1></div>';
+  var x = '<div class="col-sm-12"><h1>Inventory</h1></div>';
   var i, j;
   var modals = '';
 
