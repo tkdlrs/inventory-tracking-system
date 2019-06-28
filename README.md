@@ -1,2 +1,2 @@
 # Inventory Tracking System
-a simple web application for maintaining a set of inventory.
+A simple web application for maintaining a set of inventory.
