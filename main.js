@@ -177,7 +177,6 @@ function submitItem(e) {
   let itemName = getInputValue('itemName');
   sanitizer(itemName);
   let itemAmount = getInputValue('itemAmount');
-  sanitizer(itemAmount);
   itemAmount = parseInt(itemAmount, 10);
 
   let itemImage = getInputValue('itemImage');
