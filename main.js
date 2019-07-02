@@ -70,19 +70,6 @@ function updatedInventory() {
                     <label for="editItem${Inventory.items[i].id}Location">Location</label>
                     <input class="form-control" type="text" id="editItem${Inventory.items[i].id}Location" value="${Inventory.items[i].location}" required=""/>
 
-                    <div>
-                      <p>Check out status</p>
-                      <label class="radio-inline" for="true">
-                        <input  type="radio" name="editItemStatus" value="true" />
-                        Yes
-                      </label>
-
-                      <label class="radio-inline" for="false">
-                        <input  type="radio" name="editItemStatus" value="false" checked="" />
-                        No
-                      </label>
-                    </div>
-
                     <br />
                     <button data-dismiss="modal" type="button" value="${Inventory.items[i].id}" class="saveItemEdits btn btn-primary pull-right">Save changes</button>
                   </form>
@@ -91,8 +78,6 @@ function updatedInventory() {
               <div class="clearfix"></div>
             </div>
             <div class="modal-footer">
-
-
             </div>
           </div>
         </div>
@@ -165,7 +150,6 @@ function saveChanges() {
   Inventory.items[currentIndex].brand = sanitizer(updatedItemBrand);
 
   let updatedItemAmount = getInputValue(`editItem${Inventory.items[currentIndex].id}Amount`);
-  sanitizer(updatedItemAmount);
   Inventory.items[currentIndex].amount = parseInt(updatedItemAmount, 10);
 
   let updatedItemImage = getInputValue(`editItem${Inventory.items[currentIndex].id}Image`);
