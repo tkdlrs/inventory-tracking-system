@@ -186,7 +186,6 @@ function submitItem(e) {
   let itemLocation = getInputValue('itemLocation');
   sanitizer(itemLocation);
   let itemCheckoutStatus = document.getElementsByName('status');
-  sanitizer(itemCheckoutStatus);
 
   for (var status = 0; status < itemCheckoutStatus.length; status++) {
     if (itemCheckoutStatus[status].checked) {
